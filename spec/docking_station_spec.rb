@@ -40,4 +40,13 @@ it 'releases a bike' do
   end
 end
 
+describe "#dock" do
+  it "raises an error when dock is full" do
+    bike = Bike.new
+    #subject.dock(bike)
+    subject.dock(bike)
+    expect {subject.dock(bike)}.to raise_error("Dock is full")
+  end
+end
+
 end

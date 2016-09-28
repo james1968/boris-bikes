@@ -10,9 +10,16 @@ attr_accessor :bike
     end
 
     def dock(bike)
+        fail "Dock is full" if @bike
       @bike = bike
     end
 end
 
 #station = DockingStation.new
+#bike = Bike.new
+#station.dock(bike)
+#station.dock(bike)
+
+
+
 #station.release_bike
