@@ -4,8 +4,8 @@ class DockingStation
 attr_accessor :bike
 
     def release_bike
-        raise Exception.new("There is no bike available to rent.") if @bike.nil?
-        #fail("There is no bike available to rent.") unless @bike
+        fail 'No bikes available' unless @bike
+        @bike
        #Bike.new
     end
 

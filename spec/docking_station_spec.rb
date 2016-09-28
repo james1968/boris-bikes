@@ -7,10 +7,10 @@ describe DockingStation do
 #release_bike returns a new instance of the Bike class
 #a) gets a bike, and then b) expects the bike to be working
 
-it 'release a bike' do
-    bike = subject.release_bike
-    expect(bike).to be_working
-end
+#it 'release a bike' do
+#    bike = subject.release_bike
+#    expect(bike).to be_working
+#end
 
 it {is_expected.to respond_to(:dock).with(1).argument}
 
@@ -27,11 +27,17 @@ it 'returns docked bike' do
   expect(subject.bike).to eq bike
 end
 
+describe '#release_bike' do
+it 'releases a bike' do
+    bike = Bike.new
+    expect(bike).to be_working
+    subject.dock(bike)
+    expect(subject.release_bike).to eq bike
+  end
 
-it 'no bike error if none available' do
-    #expect {subject.release_bike}.to raise_error("There is no bike available to rent.")
-    expect {raise Exception.new("There is no bike available to rent.")}.to raise_error("There is no bike available to rent.")
-    
+  it 'raises an error when there are no bikes available' do
+    expect { subject.release_bike }.to raise_error('No bikes available')
+  end
 end
 
 end
