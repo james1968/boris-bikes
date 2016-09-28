@@ -41,6 +41,12 @@ describe DockingStation do
         expect { subject.release_bike }.to raise_error 'No bike available'
       end
 
+    end
+
+    it 'has a default capacity' do
+      capacity = 10
+      expect (subject.capacity).to eq DockingSation::DEFAULT_CAPACITY
 
     end
+
 end
