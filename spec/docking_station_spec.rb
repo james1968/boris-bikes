@@ -12,4 +12,7 @@ it 'release a bike' do
     expect(bike).to be_working
 end
 
+it {is_expected.to respond_to :dock_bike}
+
+
 end
