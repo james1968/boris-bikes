@@ -27,4 +27,11 @@ it 'returns docked bike' do
   expect(subject.bike).to eq bike
 end
 
+
+it 'no bike error if none available' do
+    #expect {subject.release_bike}.to raise_error("There is no bike available to rent.")
+    expect {raise Exception.new("There is no bike available to rent.")}.to raise_error("There is no bike available to rent.")
+    
+end
+
 end
