@@ -1,52 +1,42 @@
-require 'docking_station'
+require 'spec_helper'
 
 describe DockingStation do
-    it { is_expected.to respond_to :release_bike}
 
+  it {is_expected.to respond_to :release_bike}
 
-#release_bike returns a new instance of the Bike class
-#a) gets a bike, and then b) expects the bike to be working
-
-#it 'release a bike' do
-#    bike = subject.release_bike
-#    expect(bike).to be_working
-#end
-
-it {is_expected.to respond_to(:dock).with(1).argument}
-
-it 'bike is docked' do
-  bike = Bike.new
-  expect(subject.dock(bike)).to eq bike
-end
-
-it {is_expected.to respond_to (:bike) }
-
-it 'returns docked bike' do
-  bike = Bike.new
-  subject.dock(bike)
-  expect(subject.bike).to eq bike
-end
-
-describe '#release_bike' do
-it 'releases a bike' do
+  it 'releases working bikes' do
     bike = Bike.new
-    expect(bike).to be_working
-    subject.dock(bike)
-    expect(subject.release_bike).to eq bike
+    expect(bike.working?).to eq(true)
   end
 
-  it 'raises an error when there are no bikes available' do
-    expect { subject.release_bike }.to raise_error('No bikes available')
-  end
-end
+#Docks returned bike
+  it {is_expected.to respond_to(:dock).with(1).argument}
 
-describe "#dock" do
-  it "raises an error when dock is full" do
+  it {is_expected.to respond_to :bike}
+
+  it 'returns docked bikes' do
     bike = Bike.new
-    #subject.dock(bike)
     subject.dock(bike)
-    expect {subject.dock(bike)}.to raise_error("Dock is full")
+    expect(subject.bike).to eq @bike
   end
-end
 
+  describe '#release_bike' do
+    it "raise an error if there are no bikes" do
+      expect{subject.release_bike}.to raise_error 'No bikes available'
+    end
+
+    it 'releases a bike' do
+      bike = Bike.new
+      subject.dock(bike)
+      expect(subject.release_bike).to eq bike
+      end
+    end
+
+    describe '#dock' do
+      it 'will not dock a bike if the docking station is full' do
+        bike = 20.times{Bike.new}
+        20.times {subject.dock(bike)}
+        expect{subject.dock(bike)}.to raise_error 'Dock is full'
+      end
+    end
 end
