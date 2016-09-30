@@ -7,8 +7,11 @@ class DockingStation
     @capacity = capacity
   end
 	def release_bike
+    puts @broken
+    puts @twentybikes
+    raise "Oh no! No bikes available!" if @broken == true
     raise "Oh no! No bikes available!" if empty?
-    raise "Oh no! No bikes available!" if broken?
+    #raise "Oh no! No bikes available!" if @broken == true
     @twentybikes.pop
 	end
   def empty?
