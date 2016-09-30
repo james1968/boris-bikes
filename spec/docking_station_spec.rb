@@ -11,15 +11,16 @@ describe DockingStation do
 
   it "docks something" do
     bike = Bike.new
-    expect(subject.dock double(:bike)).to eq [bike]
+    subject.dock(bike)
+    expect(subject.bike).to eq @bike
   end
 
   describe 'initialization' do
     subject { DockingStation.new }
-    let(:bike) { Bike.new }
+    let(:bike) { double :bike }
     it 'defaults capacity' do
       described_class::DEFAULT_CAPACITY.times do
-        subject.dock(bike)
+        subject.dock(double :bike)
       end
       expect{ subject.dock double(:bike) }.to raise_error 'Docking station full'
     end
@@ -41,8 +42,8 @@ describe DockingStation do
 
   describe '#dock' do
     it "should not accept more than capacity" do
-      subject.capacity.times { subject.dock Bike.new}
-      expect { subject.dock Bike.new}.to raise_error ("Docking station full")
+      subject.capacity.times { subject.dock double :bike}
+      expect { subject.dock double(:bike) }.to raise_error ("Docking station full")
     end
   end
 end
