@@ -9,9 +9,8 @@ class DockingStation
 	def release_bike
     puts @broken
     puts @twentybikes
-    raise "Oh no! No bikes available!" if @broken == true
     raise "Oh no! No bikes available!" if empty?
-    #raise "Oh no! No bikes available!" if @broken == true
+    raise "Oh no! No bikes available!" if @twentybikes[-1].broken?
     @twentybikes.pop
 	end
   def empty?
